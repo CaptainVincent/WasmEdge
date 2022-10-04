@@ -84,7 +84,7 @@ use wasmedge_sys::{self as sys, AsyncResult, Engine as sys_engine};
 ///     Ok(())
 /// }
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Vm {
     pub(crate) inner: sys::Vm,
     active_module: Option<Module>,
@@ -823,7 +823,7 @@ mod tests {
 
     #[test]
     fn test_vm_wasi_module() {
-        let host_reg_options = HostRegistrationConfigOptions::new().wasi(true);
+        let host_reg_options = HostRegistrationConfigOptions::default().wasi(true);
         let result = ConfigBuilder::new(CommonConfigOptions::default())
             .with_host_registration_config(host_reg_options)
             .build();
@@ -846,7 +846,7 @@ mod tests {
     #[test]
     #[cfg(target_os = "linux")]
     fn test_vm_wasmedge_process_module() {
-        let host_reg_options = HostRegistrationConfigOptions::new().wasmedge_process(true);
+        let host_reg_options = HostRegistrationConfigOptions::default().wasmedge_process(true);
         let result = ConfigBuilder::new(CommonConfigOptions::default())
             .with_host_registration_config(host_reg_options)
             .build();
