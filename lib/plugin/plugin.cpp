@@ -388,7 +388,7 @@ Plugin::registerPlugin(const PluginDescriptor *Desc) noexcept {
   }
 
   const auto Index = PluginRegistory.size();
-  PluginRegistory.push_back(Plugin(Desc));
+  PluginRegistory.emplace_back(Desc);
   PluginNameLookup.emplace(Desc->Name, Index);
 
   return;
