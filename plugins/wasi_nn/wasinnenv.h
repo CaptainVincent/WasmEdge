@@ -192,8 +192,6 @@ struct WasiNNEnvironment :
   std::vector<Graph> NNGraph;
   std::vector<Context> NNContext;
   static PO::List<std::string> NNModels;
-
-  static Plugin::PluginRegister Register;
 };
 
 } // namespace WASINN
