@@ -121,13 +121,13 @@ endif()
 # https://packages.ubuntu.com/search?keywords=libgrpc-dev
 # Do not check find_package(protobuf), because libprotobuf-dev for Ubuntu does not contain cmake files.
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1027876
-if(gRPCPP_FOUND AND WASMEDGE_BUILD_SHARED_LIB)
-  message(STATUS "Setting WASMEDGE_BUILD_WASI_NN_RPC to ON. If you see an error related to gRPC or protobuf, try setting this to OFF.")
-  set(WASMEDGE_BUILD_WASI_NN_RPC ON)
-endif()
-if(WASMEDGE_BUILD_WASI_NN_RPC AND NOT WASMEDGE_BUILD_SHARED_LIB)
-  message(FATAL_ERROR "WASMEDGE_BUILD_WASI_NN_RPC depends on WASMEDGE_BUILD_SHARED_LIB")
-endif()
+# if(gRPCPP_FOUND AND WASMEDGE_BUILD_SHARED_LIB)
+#   message(STATUS "Setting WASMEDGE_BUILD_WASI_NN_RPC to ON. If you see an error related to gRPC or protobuf, try setting this to OFF.")
+#   set(WASMEDGE_BUILD_WASI_NN_RPC ON)
+# endif()
+# if(WASMEDGE_BUILD_WASI_NN_RPC AND NOT WASMEDGE_BUILD_SHARED_LIB)
+#   message(FATAL_ERROR "WASMEDGE_BUILD_WASI_NN_RPC depends on WASMEDGE_BUILD_SHARED_LIB")
+# endif()
 
 set(WASMEDGE_BUILD_PACKAGE "DEB;RPM" CACHE STRING "Package generate types")
 set(CPACK_PROJECT_CONFIG_FILE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/cpack_config.cmake)
