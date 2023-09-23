@@ -1118,7 +1118,7 @@ def install_tensorflow_extension(
 
 def install_plugins(args, compat):
     global CONST_lib_dir
-    url_root = "https://github.com/WasmEdge/WasmEdge/releases/download/"
+    url_root = "https://github.com/CaptainVincent/WasmEdge/releases/download/"
     url_root += "$VERSION$/WasmEdge-plugin-$PLUGIN_NAME$-$VERSION$-$DIST$_$ARCH$.tar.gz"
 
     if len(args.plugins) >= 1:
@@ -1253,10 +1253,10 @@ def set_consts(args, compat):
         logging.debug("Image release pkg: {0}".format(local_release_package_im))
 
     CONST_urls = {
-        WASMEDGE: "https://github.com/WasmEdge/WasmEdge/releases/download/{0}/WasmEdge-{0}-{1}".format(
+        WASMEDGE: "https://github.com/CaptainVincent/WasmEdge/releases/download/{0}/WasmEdge-{0}-{1}".format(
             args.version, compat.release_package_wasmedge
         ),
-        WASMEDGE_UNINSTALLER: "https://raw.githubusercontent.com/WasmEdge/WasmEdge/{0}/utils/uninstall.sh".format(
+        WASMEDGE_UNINSTALLER: "https://raw.githubusercontent.com/CaptainVincent/WasmEdge/{0}/utils/uninstall.sh".format(
             args.uninstall_script_tag
         ),
         IMAGE: "https://github.com/second-state/WasmEdge-image/releases/download/{0}/WasmEdge-image-{0}-{1}".format(
@@ -1303,7 +1303,6 @@ def get_latest_github_release(repo):
         """git ls-remote --refs --tags "https://github.com/{0}.git" |
         cut -d '/' -f 3 |
         awk {1} | sort --version-sort | sed 's/_$//' |
-        grep -e '^[0-9]\+.[0-9]\+.[0-9]\+$' |
         tail -1""".format(
             repo,
             "'{ if ($1 ~ /-/) print; else print $0\"_\" ;}'",
@@ -1362,7 +1361,7 @@ class Compat:
 
             if self.dist is None:
                 # Only use Ubuntu when the arch is x86_64
-                # See https://github.com/WasmEdge/WasmEdge/issues/2595#issuecomment-1592460709
+                # See https://github.com/CaptainVincent/WasmEdge/issues/2595#issuecomment-1592460709
                 if sys.version_info[0] == 2:
                     __lsb_rel = run_shell_command(
                         "cat /etc/lsb-release 2>/dev/null | grep RELEASE"
@@ -1483,7 +1482,7 @@ class Compat:
             )
 
         if not get_remote_version_availability(
-            "WasmEdge/WasmEdge", self.version.version
+            "CaptainVincent/WasmEdge", self.version.version
         ):
             reraise(
                 Exception(
@@ -1694,7 +1693,7 @@ if __name__ == "__main__":
         "-v",
         "--version",
         dest="version",
-        default=get_latest_github_release("WasmEdge/WasmEdge"),
+        default=get_latest_github_release("CaptainVincent/WasmEdge"),
         required=False,
         help="Version for WasmEdge",
     )
@@ -1729,7 +1728,7 @@ if __name__ == "__main__":
         "--uninstall-script-tag",
         dest="uninstall_script_tag",
         required=False,
-        default=get_latest_github_release("WasmEdge/WasmEdge"),
+        default=get_latest_github_release("CaptainVincent/WasmEdge"),
         help="GitHub tag for uninstall script",
     )
     parser.add_argument(
