@@ -27,7 +27,8 @@ std::map<std::string_view, Backend> BackendMap = {
     {"pytorch"sv, Backend::PyTorch},
     {"tensorflowlite"sv, Backend::TensorflowLite},
     {"autodetect"sv, Backend::Autodetect},
-    {"ggml"sv, Backend::GGML}};
+    {"ggml"sv, Backend::GGML},
+    {"sd"sv, Backend::SD}};
 
 std::map<std::string_view, Device> DeviceMap = {{"cpu"sv, Device::CPU},
                                                 {"gpu"sv, Device::GPU},
@@ -94,7 +95,7 @@ WasiNNEnvironment::WasiNNEnvironment() noexcept {
     auto Device = DeviceMap.find(Target);
     if (Backend != BackendMap.end() && Device != DeviceMap.end()) {
       for (const std::string &Path : Paths) {
-        if (Backend->second == Backend::GGML) {
+        if (Backend->second == Backend::GGML || Backend->second == Backend::SD) {
           // We write model path to model data to avoid file IO in llama.cpp.
           std::string ModelPath = "preload:" + Path;
           std::vector<uint8_t> ModelPathData(ModelPath.begin(),

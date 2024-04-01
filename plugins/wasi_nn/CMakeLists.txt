@@ -117,6 +117,21 @@ if(BACKEND STREQUAL "ggml")
   endif()
 endif()
 
+if(BACKEND STREQUAL "sd")
+  set(SD_BUILD_SHARED_LIBS ON)
+  # setup stable-diffusion.cpp
+  message(STATUS "Downloading stable-diffusion.cpp source")
+  include(FetchContent)
+  FetchContent_Declare(
+    stable-diffusion
+    GIT_REPOSITORY https://github.com/leejet/stable-diffusion.cpp.git
+    GIT_TAG        583cc
+    GIT_SHALLOW    FALSE
+  )
+  FetchContent_MakeAvailable(stable-diffusion)
+  set_property(TARGET stable-diffusion PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
+
 wasmedge_add_library(wasmedgePluginWasiNN
   SHARED
   wasinnenv.cpp
@@ -128,6 +143,7 @@ wasmedge_add_library(wasmedgePluginWasiNN
   torch.cpp
   tfl.cpp
   ggml.cpp
+  sd.cpp
 )
 
 target_compile_options(wasmedgePluginWasiNN
@@ -178,6 +194,20 @@ if(BACKEND STREQUAL "ggml")
       COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/_deps/llama-src/ggml-common.h ggml-common.h
     )
   endif()
+endif()
+
+if(BACKEND STREQUAL "sd")
+  # Setup include and link from stable-diffusion.cpp
+  target_include_directories(wasmedgePluginWasiNN PRIVATE
+    ${CMAKE_BINARY_DIR}/_deps/stable-diffusion-src
+    ${CMAKE_BINARY_DIR}/_deps/stable-diffusion-src/thirdparty
+    ${CMAKE_BINARY_DIR}/_deps/stable-diffusion-src/ggml/include
+  )
+  target_link_libraries(wasmedgePluginWasiNN PRIVATE stable-diffusion)
+  target_compile_options(wasmedgePluginWasiNN PRIVATE
+    "-w"
+  )
+
 endif()
 
 if(WASMEDGE_LINK_PLUGINS_STATIC)

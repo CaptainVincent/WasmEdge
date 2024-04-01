@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "ggml.h"
+#include "sd.h"
 #include "onnx.h"
 #include "openvino.h"
 #include "tf.h"
