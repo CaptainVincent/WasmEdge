@@ -21,6 +21,7 @@
 #include "runtime/instance/module.h"
 #include <cstdint>
 #include <memory>
+#include <unordered_set>
 #include <vector>
 
 #if WASMEDGE_OS_WINDOWS
@@ -139,6 +140,7 @@ public:
 private:
   static std::vector<Plugin> &PluginRegistory;
   static std::unordered_map<std::string_view, std::size_t> &PluginNameLookup;
+  static std::unordered_set<std::string_view> loadedPaths;
 
   std::filesystem::path Path;
   const PluginDescriptor *Desc = nullptr;

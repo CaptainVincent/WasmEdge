@@ -227,6 +227,7 @@ std::vector<Plugin> &Plugin::PluginRegistory =
 std::unordered_map<std::string_view, std::size_t> &Plugin::PluginNameLookup =
     reinterpret_cast<std::unordered_map<std::string_view, std::size_t> &>(
         PluginNameLookupStorage);
+std::unordered_set<std::string_view> Plugin::loadedPaths;
 
 std::vector<std::filesystem::path> Plugin::getDefaultPluginPaths() noexcept {
   using namespace std::literals::string_view_literals;
@@ -307,6 +308,13 @@ std::vector<std::filesystem::path> Plugin::getDefaultPluginPaths() noexcept {
 }
 
 WASMEDGE_EXPORT bool Plugin::load(const std::filesystem::path &Path) noexcept {
+
+  if (loadedPaths.find(Path.string()) != loadedPaths.end()) {
+    return true;
+  } else {
+    loadedPaths.insert(Path.string());
+  }
+
   std::error_code Error;
   auto Status = std::filesystem::status(Path, Error);
   if (likely(!Error)) {
