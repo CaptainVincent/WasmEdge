@@ -1,0 +1,18 @@
+#![allow(non-snake-case-crate-lib)]
+
+[package]
+name = "wasi_nn_rust"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+name = "wasmedgePluginWasiNN"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+ctor = "0.2.8"
+lazy_static = "1.4.0"
+burn = "0.13.0"
+function_name = "0.3.0"
+wasmedge_plugin_sdk = { git = "https://github.com/CaptainVincent/wasmedge_plugin_rust_sdk.git", branch = "add_options" }
