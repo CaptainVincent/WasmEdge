@@ -71,7 +71,7 @@ if(WASMEDGE_PLUGIN_RUSTLS)
   add_subdirectory(wasmedge_rustls)
 endif()
 
-if(WASMEDGE_PLUGIN_WASI_NN_RUST_BACKEND)
+if(WASMEDGE_PLUGIN_WASI_NN_RUST_MODEL)
   add_subdirectory(wasi_nn_rust)
 endif()
 

@@ -75,7 +75,7 @@ option(WASMEDGE_PLUGIN_TENSORFLOW "Enable WasmEdge TensorFlow plugin." OFF)
 option(WASMEDGE_PLUGIN_TENSORFLOWLITE "Enable WasmEdge TensorFlow-Lite plugin." OFF)
 option(WASMEDGE_PLUGIN_RUSTLS "Enable WasmEdge Rustls plugin." OFF)
 option(WASMEDGE_PLUGIN_ZLIB "Enable WasmEdge zlib plugin." OFF)
-option(WASMEDGE_PLUGIN_WASI_NN_RUST_BACKEND "Enable WasmEdge Wasi-NN plugin with burn backend." OFF)
+set(WASMEDGE_PLUGIN_WASI_NN_RUST_MODEL "" CACHE STRING "Enable WasmEdge Wasi-NN Rust plugin with model.")
 option(WASMEDGE_DISABLE_LIBTINFO "Disable linking against libtinfo when linking LLVM" OFF)
 
 if(WASMEDGE_BUILD_TOOLS AND WASMEDGE_BUILD_FUZZING)
