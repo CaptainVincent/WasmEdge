@@ -19,7 +19,7 @@ mod wasi_nn {
     #[cfg(feature = "whisper")]
     use crate::models::whisper::*;
     use crate::ErrNo;
-    use burn::backend::wgpu::{AutoGraphicsApi, Wgpu, WgpuDevice};
+    use burn::backend::wgpu::{AutoGraphicsApi, Dawn, WgpuDevice};
     use burn::backend::NdArray;
     use lazy_static::lazy_static;
     use std::collections::HashMap;
@@ -37,7 +37,7 @@ mod wasi_nn {
     };
 
     type NdArrayBackend = NdArray<f32>;
-    type WgpuBackend = Wgpu<AutoGraphicsApi, f32, i32>;
+    type WgpuBackend = Dawn<AutoGraphicsApi, f32, i32>;
 
     pub enum Graph {
         /// The model is loaded to the NdArray backend

@@ -15,7 +15,7 @@ whisper = ["whisper-burn", "strum", "strum_macros"]
 
 [dependencies.squeezenet-burn]
 package = "squeezenet-burn"
-branch = "prebuilt-feature"
+branch = "use-dawn"
 git = "https://github.com/CaptainVincent/models.git"
 features = ["weights_file"]
 default-features = false
@@ -23,12 +23,12 @@ optional = true
 
 [dependencies.whisper-burn]
 package = "whisper"
-branch = "dev"
+branch = "use-dawn"
 git = "https://github.com/CaptainVincent/whisper-burn.git"
 optional = true
 
 [dependencies]
-burn = { version = "0.13.2", features = ["ndarray", "wgpu"] }
+burn = { git = "https://github.com/p1-0tr/burn.git", branch = "ps-dynamic-libwebgpu", features = ["ndarray", "wgpu"] }
 wasmedge_plugin_sdk = { git = "https://github.com/second-state/wasmedge_plugin_rust_sdk.git" }
 wasi-nn = { git = "https://github.com/CaptainVincent/wasi-nn.git", branch = "burn" }
 lazy_static = "1.4.0"
