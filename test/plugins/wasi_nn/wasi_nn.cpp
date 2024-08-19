@@ -28,6 +28,7 @@ using WasmEdge::Host::WASINN::ErrNo;
     defined(WASMEDGE_PLUGIN_WASI_NN_BACKEND_PIPER) ||                          \
     defined(WASMEDGE_PLUGIN_WASI_NN_BACKEND_WHISPER) ||                        \
     defined(WASMEDGE_PLUGIN_WASI_NN_BACKEND_CHATTTS)
+
 namespace {
 
 template <typename T, typename U>

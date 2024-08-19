@@ -19,6 +19,10 @@ if(WASMEDGE_PLUGIN_WASI_NN_BACKEND)
   add_subdirectory(wasi_nn)
 endif()
 
+if(WASMEDGE_PLUGIN_WASI_NN_RUST_MODEL)
+  add_subdirectory(wasi_nn_rust)
+endif()
+
 if(WASMEDGE_PLUGIN_WASI_CRYPTO)
   add_subdirectory(wasi_crypto)
 endif()
